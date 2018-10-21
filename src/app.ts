@@ -44,7 +44,7 @@ app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
 
-app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('*', express.static(path.join(__dirname, '../public')));
 
 /**
  * Primary app routes.
