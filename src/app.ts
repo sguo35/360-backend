@@ -48,6 +48,12 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(path.join(__dirname, '../public'), 'index.html'));
 });
+app.get('*.js', function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+});
+app.get('*.css', function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+});
 /**
  * Primary app routes.
  */
