@@ -6,6 +6,8 @@ import { AccountModel } from "../models/Account";
 import Project from "../models/Project";
 import { ProjectModel } from "../models/Project";
 
+import path from "path";
+
 // update form/ProjectGrade w/incomplete results
 interface UpdateProjectGradeRequest extends Request {
   body: {
@@ -105,7 +107,7 @@ const { google } = require("googleapis");
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  "https://stephentorr.es/oauthCallback"
+  "http://localhost:3000/oauthCallback"
 );
 export const oauthToken = async (req: Request, res: Response) => {
   const url = await oauth2Client.generateAuthUrl({
@@ -118,7 +120,9 @@ export const oauthToken = async (req: Request, res: Response) => {
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/userinfo.profile"]
   });
-  res.redirect(url);
+  res.json({
+    url: url
+  }).status(200).end();
 };
 
 export const oauthCallback = async (req: Request, res: Response) => {
@@ -126,14 +130,21 @@ export const oauthCallback = async (req: Request, res: Response) => {
   const { tokens } = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
 
-  const userInfo = await google.oauth2.userinfo.get();
-  if (userInfo.data.hd !== "berkeley.edu") {
+  const plus = google.plus({
+    version: "v1",
+    auth: oauth2Client
+  });
+
+  const userInfo = await plus.people.get({ userId: "me" });
+  console.log(userInfo.data);
+  if (userInfo.data.domain !== "berkeley.edu") {
     res.status(403).end();
     return;
   }
 
-  const outObj = {
+  let outObj = {
     ...userInfo.data
   };
-  res.json(outObj).status(200).end();
+  outObj = JSON.stringify(outObj);
+  res.redirect(`http://localhost:3000/selectProject/:${outObj}`);
 };

@@ -45,6 +45,7 @@ app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
+app.get("/oauthCallback", controllers.oauthCallback);
 
 app.use("/", express.static(path.join(__dirname, "../public")));
 app.get("*", function (request, response) {
@@ -61,7 +62,6 @@ app.use(
 );
 
 app.post("/oauth", controllers.oauthToken);
-app.get("/oauthCallback", controllers.oauthCallback);
 
 /**
  * Primary app routes.
