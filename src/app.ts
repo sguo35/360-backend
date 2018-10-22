@@ -13,6 +13,8 @@ import expressValidator from "express-validator";
 import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
+import * as controllers from "./controllers/api";
+
 const MongoStore = mongo(session);
 
 // Load environment variables from .env file, where API keys and passwords are configured
@@ -44,16 +46,23 @@ app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
 
-app.use('/', express.static(path.join(__dirname, '../public')));
-app.get('*', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), 'index.html'));
+app.use("/", express.static(path.join(__dirname, "../public")));
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), "index.html"));
 });
-app.get('*.js', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+app.get("*.js", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), request.originalUrl));
 });
-app.get('*.css', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+app.get("*.css", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), request.originalUrl));
 });
+app.use(
+  express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+);
+
+app.post("/oauth", controllers.oauthToken);
+app.get("/oauthCallback", controllers.oauthCallback);
+
 /**
  * Primary app routes.
  */

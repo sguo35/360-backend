@@ -1,6 +1,10 @@
 import { Response, Request, NextFunction } from "express";
 import ProjectGrade from "../models/ProjectGrade";
 import { Prompt } from "../models/Prompt";
+import Account from "../models/Account";
+import { AccountModel } from "../models/Account";
+import Project from "../models/Project";
+import { ProjectModel } from "../models/Project";
 
 // update form/ProjectGrade w/incomplete results
 interface UpdateProjectGradeRequest extends Request {
@@ -17,9 +21,9 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
   const projectGrade = await ProjectGrade.find({
     id: req.body.id
   })
-  .update({
-    responses: req.body.prompts
-  });
+    .update({
+      responses: req.body.prompts
+    });
   res.status(200).end();
 };
 
@@ -52,6 +56,84 @@ export const submitProjectGrade = async (req: SubmitProjectGradeRequest, res: Re
 // populate the spreadsheet w/current results
 
 // get dashboard data
-// own avg, team avg 3 categories
+// own avg, project avg 3 categories, all qualitative feedback
+interface GetDashboardDataRequest extends Request {
+  body: {
+    email: string;
+  };
+}
+export const getDashboardData = async (req: GetDashboardDataRequest, res: Response) => {
+  const account = <AccountModel>await Account.findOne({
+    email: req.body.email
+  });
+  // find all the account's project grades for both the account and their team
+  const accountGrades = await account.projects.map(async (project: string) => {
+    return await ProjectGrade.find({
+      project: project
+    });
+  });
+
+  // compute categorical grade for the user
+  // TODO(Jeff): wait for point weights
+  // compute the team's categorical grade
+
+  // filter for the account's received feedback
+};
 
 // get ProjectGrade id's for user and project
+interface GetProjectGradeIdsRequest extends Request {
+  body: {
+    email: string;
+    projectId: string;
+  };
+}
+/**
+ * Returns the ProjectGrades for the given project and user.
+ */
+export const getProjectGradeIds = async (req: GetProjectGradeIdsRequest, res: Response) => {
+  const projectGradeIds = await ProjectGrade.find({
+    grader: req.body.email,
+    project: req.body.projectId
+  })
+    .select("grader graded project responses done id");
+
+  res.json(projectGradeIds).status(200).end();
+};
+
+const { google } = require("googleapis");
+
+const oauth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  "https://stephentorr.es/oauthCallback"
+);
+export const oauthToken = async (req: Request, res: Response) => {
+  const url = await oauth2Client.generateAuthUrl({
+    // 'online' (default) or 'offline' (gets refresh_token)
+    access_type: "online",
+
+    // If you only need one scope you can pass it as a string
+    scope: [
+      "https://www.googleapis.com/auth/plus.me",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"]
+  });
+  res.redirect(url);
+};
+
+export const oauthCallback = async (req: Request, res: Response) => {
+  const code = req.query.code;
+  const { tokens } = await oauth2Client.getToken(code);
+  oauth2Client.setCredentials(tokens);
+
+  const userInfo = await google.oauth2.userinfo.get();
+  if (userInfo.data.hd !== "berkeley.edu") {
+    res.status(403).end();
+    return;
+  }
+
+  const outObj = {
+    ...userInfo.data
+  };
+  res.json(outObj).status(200).end();
+};
