@@ -126,7 +126,7 @@ const { google } = require("googleapis");
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  "http://localhost:3000/oauthCallback"
+  "https://stephentorr.es/oauthCallback"
 );
 export const oauthToken = async (req: Request, res: Response) => {
   const url = await oauth2Client.generateAuthUrl({
@@ -165,5 +165,5 @@ export const oauthCallback = async (req: Request, res: Response) => {
     ...userInfo.data
   };
   outObj = JSON.stringify(outObj);
-  res.redirect(`http://localhost:3000/selectProject/:${outObj}`);
+  res.redirect(`https://stephentorr.es/selectProject/:${outObj}`);
 };
