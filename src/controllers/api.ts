@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from "express";
-import ProjectGrade from "../models/ProjectGrade";
+import ProjectGrade, { ProjectGradeModel } from "../models/ProjectGrade";
 import { Prompt } from "../models/Prompt";
 import Account from "../models/Account";
 import { AccountModel } from "../models/Account";
@@ -20,12 +20,15 @@ interface UpdateProjectGradeRequest extends Request {
  * for the given ProjectGrade to the server, even if some of them have not changed.
  */
 export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Response) => {
-  const projectGrade = await ProjectGrade.find({
+  const projectGrade = <ProjectGradeModel>await ProjectGrade.findOne({
     id: req.body.id
-  })
-    .update({
-      responses: req.body.prompts
-    });
+  });
+
+  await ProjectGrade.findOne({
+    id: req.body.id
+  }).update({
+    responses: { ...req.body.prompts, ...projectGrade.responses }
+  });
   res.status(200).end();
 };
 
@@ -100,6 +103,22 @@ export const getProjectGradeIds = async (req: GetProjectGradeIdsRequest, res: Re
     .select("grader graded project responses done id");
 
   res.json(projectGradeIds).status(200).end();
+};
+
+/**
+ * Returns Projects for the given Account
+ */
+interface GetAccount extends Request {
+  body: {
+    email: string;
+  };
+}
+
+export const getAccount = async (req: GetAccount, res: Response) => {
+  const account = await Account.findOne({
+    email: req.body.email
+  });
+  res.json(account).status(200).end();
 };
 
 const { google } = require("googleapis");

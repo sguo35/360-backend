@@ -62,6 +62,9 @@ app.use(
 );
 
 app.post("/oauth", controllers.oauthToken);
+app.post("/updateProjectGrade", controllers.updateProjectGrade);
+app.post("/getAccount", controllers.getAccount);
+app.post("/getProjectGradeIds", controllers.getProjectGradeIds);
 
 /**
  * Primary app routes.

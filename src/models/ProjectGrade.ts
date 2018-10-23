@@ -6,7 +6,7 @@ export type ProjectGradeModel = mongoose.Document & {
   grader: string,
   project: string,
   graded: string,
-  responses: Array<Prompt>,
+  responses: Object,
   done: boolean,
   id: string
 };
