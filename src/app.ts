@@ -43,6 +43,12 @@ app.use(expressValidator());
 
 app.use(flash());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get("/oauthCallback", controllers.oauthCallback);
 
 app.use("/", express.static(path.join(__dirname, "../public")));
