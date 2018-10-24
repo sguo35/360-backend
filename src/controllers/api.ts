@@ -80,6 +80,25 @@ export const submitProjectGrade = async (req: SubmitProjectGradeRequest, res: Re
   res.status(200).end();
 };
 
+interface GetProjectGradeRequest extends Request {
+  body: {
+    grader: string;
+    graded: string;
+    project: string;
+  };
+}
+/**
+ * Submits the final grading for ProjectGrade with id `id` and marks it as done.
+ */
+export const getProjectGrade = async (req: GetProjectGradeRequest, res: Response) => {
+  const projectGrade = await ProjectGrade.find({
+    grader: req.body.grader,
+    graded: req.body.graded,
+    project: req.body.project
+  });
+  res.json(projectGrade).status(200).end();
+};
+
 // send grading dashboard emails
 
 // send to everyone
