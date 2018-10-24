@@ -8,11 +8,17 @@ import { ProjectModel } from "../models/Project";
 
 import path from "path";
 
+const uuidv4 = require("uuid/v4");
+
 // update form/ProjectGrade w/incomplete results
 interface UpdateProjectGradeRequest extends Request {
   body: {
-    id: string;
-    prompts: Array<Prompt>;
+    grader: string,
+    project: string,
+    graded: string,
+    responses: Array<Object>,
+    done: boolean,
+    questionIndex: number
   };
 }
 /**
@@ -21,14 +27,35 @@ interface UpdateProjectGradeRequest extends Request {
  */
 export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Response) => {
   const projectGrade = <ProjectGradeModel>await ProjectGrade.findOne({
-    id: req.body.id
+    grader: req.body.grader,
+    project: req.body.project,
+    graded: req.body.graded
   });
 
+  if (!projectGrade) {
+    await ProjectGrade.create({
+      id: uuidv4(),
+      grader: req.body.grader,
+      project: req.body.project,
+      graded: req.body.graded,
+      responses: [],
+      done: false
+    });
+  }
+
   await ProjectGrade.findOne({
-    id: req.body.id
+    grader: req.body.grader,
+    project: req.body.project,
+    graded: req.body.graded
   }).update({
-    responses: { ...req.body.prompts, ...projectGrade.responses }
+    responses: [...projectGrade.responses, ...req.body.responses]
   });
+
+  console.log(await ProjectGrade.findOne({
+    grader: req.body.grader,
+    project: req.body.project,
+    graded: req.body.graded
+  }));
   res.status(200).end();
 };
 
