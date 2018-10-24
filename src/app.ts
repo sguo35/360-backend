@@ -70,6 +70,7 @@ app.post("/updateProjectGrade", controllers.updateProjectGrade);
 app.post("/getAccount", controllers.getAccount);
 app.post("/getProjectGradeIds", controllers.getProjectGradeIds);
 app.post("/getProjectGrade", controllers.getProjectGrade);
+app.post("/submitProjectGrade", controllers.submitProjectGrade);
 
 /**
  * Primary app routes.
