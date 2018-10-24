@@ -6,7 +6,7 @@ export type ProjectGradeModel = mongoose.Document & {
   grader: string,
   project: string,
   graded: string,
-  responses: Array<Object>,
+  responses: Object,
   done: boolean,
   id: string
 };
@@ -15,7 +15,7 @@ const projectGradeSchema = new mongoose.Schema({
   grader: { type: String },
   project: { type: String },
   graded: { type: String },
-  responses: { type: Array },
+  responses: { type: Object },
   done: { type: Boolean },
   id: { type: String }
 }, { timestamps: true });

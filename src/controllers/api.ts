@@ -16,8 +16,7 @@ interface UpdateProjectGradeRequest extends Request {
     grader: string,
     project: string,
     graded: string,
-    responses: Array<Object>,
-    done: boolean,
+    responses: Object,
     questionIndex: number
   };
 }
@@ -38,7 +37,7 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
       grader: req.body.grader,
       project: req.body.project,
       graded: req.body.graded,
-      responses: [],
+      responses: {},
       done: false
     });
   }
@@ -48,7 +47,7 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
     project: req.body.project,
     graded: req.body.graded
   }).update({
-    responses: [...projectGrade.responses, ...req.body.responses]
+    responses: {...projectGrade.responses, ...req.body.responses}
   });
 
   console.log(await ProjectGrade.findOne({
@@ -62,7 +61,9 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
 // submit ProjectGrade
 interface SubmitProjectGradeRequest extends Request {
   body: {
-    id: string; // the ProjectGrade id
+    grader: string;
+    graded: string;
+    project: string;
   };
 }
 /**
@@ -70,7 +71,9 @@ interface SubmitProjectGradeRequest extends Request {
  */
 export const submitProjectGrade = async (req: SubmitProjectGradeRequest, res: Response) => {
   const projectGrade = await ProjectGrade.find({
-    id: req.body.id
+    grader: req.body.grader,
+    graded: req.body.graded,
+    project: req.body.project
   }).update({
     done: true
   });
