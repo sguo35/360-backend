@@ -80,7 +80,7 @@ async function populateGrade(data) {
   doc.getInfo = util.promisify(doc.getInfo);
   const info = await doc.getInfo();
   console.log("Loaded doc: " + info.title + " by " + info.author.email);
-  let i = 0;
+  i = 0;
   while (i < info.worksheets.length && info.worksheets[i].title !== newGraded) {
     i++;
   }
@@ -93,7 +93,7 @@ async function populateGrade(data) {
     "max-col": 7
   });
   console.log(cells);
-  let j = 0;
+  i = 0;
   while (i < cells.length) {
     if (cells[i].value === "Rater " + (i + 1)) {
       const graderCell = cells[i];
@@ -103,7 +103,7 @@ async function populateGrade(data) {
       await graderCell.save();
       break;
     }
-    j++;
+    i++;
   }
   console.log(graderRowIndex);
   cells = await sheet.getCells({
