@@ -84,7 +84,7 @@ async function populateGrade(data) {
   while (i < info.worksheets.length && info.worksheets[i].title !== newGraded) {
     i++;
   }
-  sheet = await info.worksheets[i];
+  sheet = info.worksheets[i];
   sheet.getCells = util.promisify(sheet.getCells);
   let cells = await sheet.getCells({
     "min-row": 1 + projectHeaderRow,
@@ -92,12 +92,13 @@ async function populateGrade(data) {
     "min-col": 7,
     "max-col": 7
   });
+  console.log(cells);
   let j = 0;
   while (i < cells.length) {
     if (cells[i].value === "Rater " + (i + 1)) {
-      const graderCell = await cells[i];
-      graderRowIndex = await graderCell.row;
-      graderCell.value = await newGrader;
+      const graderCell = cells[i];
+      graderRowIndex = graderCell.row;
+      graderCell.value = newGrader;
       graderCell.save = util.promisify(graderCell.save);
       await graderCell.save();
       break;
