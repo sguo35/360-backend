@@ -270,6 +270,7 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
       for (const grade of grades) {
         const gradeObject = {
           graded: email,
+          grader: grade["grader"],
           leadership: {
             grade: 0,
             qualitative: []
@@ -311,7 +312,12 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
                 qualString += element["value"];
               } else if (element["type"] === "fillIn") {
                 try {
-                  qualString += grade["responses"][key]["promptResponses"][i][j];
+                  if (grade["responses"][key]["promptResponses"][i][j]) {
+                    qualString += grade["responses"][key]["promptResponses"][i][j];
+                  }
+                  else {
+                    qualString += element["placeholder"];
+                  }
                 }
                 catch (e) {
                   console.log(e);
