@@ -61,7 +61,7 @@ async function populateGrade(data) {
       const graderCell = cells[i];
       graderRowIndex = graderCell.row;
       console.log("INDEX" + graderRowIndex);
-      // graderCell.value = newGrader;
+      graderCell.value = "Rating " + (i + 1);
       graderCell.save = util.promisify(graderCell.save);
       await graderCell.save();
       break;
