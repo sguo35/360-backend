@@ -6,7 +6,7 @@ import { AccountModel } from "../models/Account";
 import Project from "../models/Project";
 import { ProjectModel } from "../models/Project";
 
-import { populate } from "../../spreadsheet";
+import { populate } from "../util/spreadsheet";
 
 import path from "path";
 
