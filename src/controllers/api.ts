@@ -6,6 +6,8 @@ import { AccountModel } from "../models/Account";
 import Project from "../models/Project";
 import { ProjectModel } from "../models/Project";
 
+import { populate } from "../../spreadsheet";
+
 import path from "path";
 
 const uuidv4 = require("uuid/v4");
@@ -349,6 +351,6 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
       }
     }
   }
-
+  await populate(outGrades);
   res.json(outGrades).status(200).end();
 };

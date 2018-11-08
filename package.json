@@ -22,7 +22,7 @@
     "serve-debug": "nodemon --inspect dist/server.js"
   },
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.1",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
@@ -35,6 +35,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "fbgraph": "^1.4.1",
+    "google-spreadsheet": "^2.0.6",
     "googleapis": "^34.0.0",
     "lodash": "^4.17.5",
     "lusca": "^1.5.2",
