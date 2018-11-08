@@ -10,6 +10,24 @@ import path from "path";
 
 const uuidv4 = require("uuid/v4");
 
+const promptsJson = require("../../prompts.json");
+let ovalTemplates = promptsJson.ovalTemplates;
+const newTemplateObj = {};
+for (const template of ovalTemplates) {
+  newTemplateObj[template.id] = template;
+}
+ovalTemplates = newTemplateObj;
+
+const projectsJson = require("../../projects.json");
+const email2name = {};
+for (const project of projectsJson["projects"]) {
+  for (const team of project["teams"]) {
+    for (let i = 0; i < team["memberEmails"].length; i++) {
+      email2name[team["memberEmails"][i]] = team["memberNames"][i];
+    }
+  }
+}
+
 // update form/ProjectGrade w/incomplete results
 interface UpdateProjectGradeRequest extends Request {
   body: {
@@ -47,7 +65,7 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
     project: req.body.project,
     graded: req.body.graded
   }).update({
-    responses: {...projectGrade.responses, ...req.body.responses}
+    responses: { ...projectGrade.responses, ...req.body.responses }
   });
 
   console.log(await ProjectGrade.findOne({
@@ -215,4 +233,75 @@ export const oauthCallback = async (req: Request, res: Response) => {
   };
   outObj = JSON.stringify(outObj);
   res.redirect(`https://stephentorr.es/selectProject/:${outObj}`);
+};
+
+
+export const updateSpreadsheet = async (req: Request, res: Response) => {
+  const projectList = [":Icebreakers", ":Attendy"];
+
+  const outGrades = [];
+  // process grades for each person
+  for (const projectName of projectList) {
+    // get everything from the MongoDB
+    let grades = await ProjectGrade.find({
+      project: projectName
+    });
+    grades = <Array<ProjectGradeModel>>grades;
+
+    const questionLookup = {
+      "0": "leadership",
+      "1": "productivity",
+      "2": "engagement"
+    };
+
+    for (const grade of grades) {
+      // compile quantitative feedback
+      const gradeObject = {
+        graded: grade["graded"],
+        leadership: {
+          grade: 0,
+          qualitative: []
+        },
+        productivity: {
+          grade: 0,
+          qualitative: []
+        },
+        engagement: {
+          grade: 0,
+          qualitative: []
+        },
+        project: projectName
+      };
+
+      for (const key in grade["responses"]) {
+        let totalPoints = 0;
+        for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
+          const prompt = grade["responses"][key]["prompts"][i];
+
+          totalPoints += ovalTemplates[prompt["ovalTemplate"]];
+
+          let qualString = "";
+          for (let j = 0; j < prompt["elements"].length; j++) {
+            const element = prompt["elements"][j];
+
+            if (element["type"] === "gradedName") {
+              qualString += email2name[grade["graded"]];
+            } else if (element["type"] === "text") {
+              qualString += email2name["value"];
+            } else if (element["type"] === "fillIn") {
+              qualString += grade["responses"][key]["promptResponses"][i][j];
+            }
+          }
+
+          gradeObject[questionLookup[key]]["qualitative"].push(qualString);
+        }
+        totalPoints = totalPoints / grade["responses"][key]["prompts"].length;
+        gradeObject[questionLookup[key]]["grade"] = totalPoints;
+      }
+
+      outGrades.push(gradeObject);
+    }
+  }
+
+  res.json(outGrades).status(200).end();
 };

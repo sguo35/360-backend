@@ -1,0 +1,1288 @@
+{
+    "ovalTemplates": [
+      {
+        "id": "oval0",
+        "category": "productivity",
+        "level": "Outstanding",
+        "points": 15
+      },
+      {
+        "id": "oval0.5",
+        "category": "productivity",
+        "level": "Outstanding",
+        "points": 13
+      },
+      {
+        "id": "oval1",
+        "category": "productivity",
+        "level": "Satisfactory",
+        "points": 10
+      },
+      {
+        "id": "oval1.5",
+        "category": "productivity",
+        "level": "Satisfactory",
+        "points": 8
+      },
+      {
+        "id": "oval2",
+        "category": "productivity",
+        "level": "Developing",
+        "points": 5
+      },
+      {
+        "id": "oval2.5",
+        "category": "productivity",
+        "level": "Developing",
+        "points": 3
+      },
+      {
+        "id": "oval3",
+        "category": "leadership",
+        "level": "Outstanding",
+        "points": 10
+      },
+      {
+        "id": "oval3.5",
+        "category": "leadership",
+        "level": "Outstanding",
+        "points": 8
+      },
+      {
+        "id": "oval4",
+        "category": "leadership",
+        "level": "Satisfactory",
+        "points": 5
+      },
+      {
+        "id": "oval4.5",
+        "category": "leadership",
+        "level": "Satisfactory",
+        "points": 3
+      },
+      {
+        "id": "oval5",
+        "category": "leadership",
+        "level": "Developing",
+        "points": 0
+      },
+      {
+        "id": "oval6",
+        "category": "engagement",
+        "level": "Outstanding",
+        "points": 25
+      },
+      {
+        "id": "oval6.5",
+        "category": "engagement",
+        "level": "Outstanding",
+        "points": 23
+      },
+      {
+        "id": "oval7",
+        "category": "engagement",
+        "level": "Satisfactory",
+        "points": 20
+      },
+      {
+        "id": "oval7.5",
+        "category": "engagement",
+        "level": "Satisfactory",
+        "points": 28
+      },
+      {
+        "id": "oval8",
+        "category": "engagement",
+        "level": "Developing",
+        "points": 15
+      },
+      {
+        "id": "oval8.5",
+        "category": "engagement",
+        "level": "Developing",
+        "points": 13
+      }
+    ],
+    "ovalVariants": [
+      {
+        "id": "promptP0",
+        "ovalTemplate": "oval0",
+        "shortForm": "Willing to learn new things",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0stretched themselves often by taking on challenges like\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "learning to write JSON",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", demonstrating a focus on delivering on the final product."
+          }
+        ]
+      },
+      {
+        "id": "promptP1",
+        "ovalTemplate": "oval0",
+        "shortForm": "Delivered consistently and on time",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was an expert at managing their own workload and fulfilling their project commitments, such as when they\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "coded a fully functioning app in less than two weeks",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ". Their execution was always timely and showed evidence of extraordinary effort and thought."
+          }
+        ]
+      },
+      {
+        "id": "promptP2",
+        "ovalTemplate": "oval0",
+        "shortForm": "Exemplified extraordinary productivity by...",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0executed at an extraordinary level. They went above and beyond by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "spending several extra hours ensuring the UI was unbelievably beautiful and seamless",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP3",
+        "ovalTemplate": "oval0.5",
+        "shortForm": "Helpful to teammates",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0went out of their way to help their teammates, moving the whole team forward in the process. For example,\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "spent time explaining spreadsheet formulas to another teammate",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0, an act that benefited the team as a whole by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "enabling multiple people to tackle the spreadsheet task together",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP4",
+        "ovalTemplate": "oval0.5",
+        "shortForm": "Promoted productive mindset",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": " understood the importance of staying focused in team meetings. They were not afraid to rein the team in when\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "discussion went off on an unrelated tangent",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", ensuring the team got its work completed on schedule."
+          }
+        ]
+      },
+      {
+        "id": "promptP5",
+        "ovalTemplate": "oval1",
+        "shortForm": "Met timelines and expectations",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0generally met the expectations of the team with only a few lapses.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could have improved by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "thoughtfully considering ways to augment the product beyond the specifications",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP6",
+        "ovalTemplate": "oval1",
+        "shortForm": "Communicated progress on deliverables",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0checked in fairly frequently on the development of projects and deliverables. However, if they were\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "more proactive in setting goals and arranging meetings",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", the team would have benefitted significantly."
+          }
+        ]
+      },
+      {
+        "id": "promptP7",
+        "ovalTemplate": "oval1.5",
+        "shortForm": "Accepted additional work if requested",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0took on the task of\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "creating a rubric and writing out survey questions",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", but only when prompted by a teammate. The task was completed at a standard level, leaving something more to be desired."
+          }
+        ]
+      },
+      {
+        "id": "promptP8",
+        "ovalTemplate": "oval2",
+        "shortForm": "Delivered subpar quality/late work",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0delivered late or lacking work on crucial assignments, such as when they were assigned to\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "making a logo",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", but ended up\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "producing an incomplete image a day after the team needed it",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP9",
+        "ovalTemplate": "oval2.5",
+        "shortForm": "Did not deliver",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not do their share of the work. In one case, they\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "failed to complete the backend code, rendering the entire project nonfunctional",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP10",
+        "ovalTemplate": "oval2",
+        "shortForm": "Unwilling to accept additional responsibilities",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was unwilling to take on more responsibilities, even when the team needed them to. In one specific situation,\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "everyone else on the team had a midterm the next day, but the team member did not accept the job of finishing the UI",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP11",
+        "ovalTemplate": "oval2.5",
+        "shortForm": "Distracted team from working",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was distracting and often was a source of disruption in team work settings.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could mediate this behavior by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "waiting to talk to their friends and check social media until after the meeting was over",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptP12",
+        "ovalTemplate": "oval2",
+        "shortForm": "Did not prioritize this project",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not give the team or project the time and effort required of them.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0should place a greater emphasis on this class as a whole by\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "committing to concrete deliverables instead of freeloading",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL0",
+        "ovalTemplate": "oval3",
+        "shortForm": "Did what others were unwilling to do",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0consistently went the extra mile,\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "taking the initiative to learn a new technical skill",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0when others were hesitant to do so. This had a significant benefit on the team by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "motivating everyone to match that level of commitment",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL1",
+        "ovalTemplate": "oval3.5",
+        "shortForm": "Created new opportunities for the team",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was always looking for opportunities that the team could benefit from, such as when they\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "coordinated a meeting with a mobile development expert to understand the principles of building apps",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ". This leadership helped the team by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "making the coding process significantly easier than it would have been without this resource",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL2",
+        "ovalTemplate": "oval3.5",
+        "shortForm": "Inspired others",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was inspirational. They\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "worked extensively on the technical side, but were always willing to communicate their work simply and patiently",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", enabling all members of the team to feel engaged and committed to the project."
+          }
+        ]
+      },
+      {
+        "id": "promptL3",
+        "ovalTemplate": "oval3",
+        "shortForm": "Strove for excellence in themselves and others",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0demanded the highest quality not only in their own work but also that of others. \u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0made their high standards clear when they\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "redid the logo designs when the team thought they needed improvement",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", making their commitment to excellence clear."
+          }
+        ]
+      },
+      {
+        "id": "promptL4",
+        "ovalTemplate": "oval3",
+        "shortForm": "Exemplified quality leadership by...",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was a great example of a leader, as evidenced by their personal parallel to\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "a specific law of leadership covered in this course",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL5",
+        "ovalTemplate": "oval4",
+        "shortForm": "Occasionally took on responsibility",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0took on the task of\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "building out the functioning Android app",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", but they could be more proactive in\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "recognizing what else needs to be done and contributing there",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL6",
+        "ovalTemplate": "oval4",
+        "shortForm": "Does not usually inspire teammates",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0worked consistantly on\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "finding a way to implement the form",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ". However,\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could improve by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "researching new features to help take the product to the next level",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL7",
+        "ovalTemplate": "oval4.5",
+        "shortForm": "Stays in comfort zone",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0worked well in the environment of\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "setting up the database and backend",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", but could expand their contributions and take on greater responsibility by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "helping with documentation or taking notes",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL8",
+        "ovalTemplate": "oval5",
+        "shortForm": "Always follows status quo",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not challenge the status quo, but simply followed what others said.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0can become more active by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "asking clarifying questions so they can help the team incrementally advance",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL9",
+        "ovalTemplate": "oval5",
+        "shortForm": "Adverse to responsibilities/new opportunities",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0should make an effort to\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "challenge themselves by learning something new",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", instead of instantly refusing to take leadership in finishing the project"
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL10",
+        "ovalTemplate": "oval5",
+        "shortForm": "Did not engage",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could become more involved by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "actually partaking in team project work",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0and taking on the responsibility of\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "showing up to meetings and contributing to ideation",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL11",
+        "ovalTemplate": "oval5",
+        "shortForm": "Fostered negative team dynamic",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was distracting and led to an unhealthy or uncomfortable team atmosphere.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0consistently\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "downplayed the contributions of others",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0and should instead\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "be more constructive when providing feedback on someone's work",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptL12",
+        "ovalTemplate": "oval5",
+        "shortForm": "Could improve leadership by...",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not take any leadership in this project.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0can improve specifically by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "taking the initiative to finish tasks instead of waiting for others to step in",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+         ]
+      },
+      {
+        "id": "promptE0",
+        "ovalTemplate": "oval6.5",
+        "shortForm": "Offered insightful participation",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0offered great insight and perspective on team goals, including\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "their idea to use high-pitched sound waves to transmit data",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", which gave the team a significant edge moving forward."
+          }
+        ]
+      },
+      {
+        "id": "promptE1",
+        "ovalTemplate": "oval6",
+        "shortForm": "Responsive to communication",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0actively communicated outside of meetings, and was easy to get ahold of.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was always\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "available to chat and ready to put aside time to meet, which the team definitely appreciated",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE2",
+        "ovalTemplate": "oval6",
+        "shortForm": "Contributed positively to team dynamic",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0not only contributed to the team, but had a positive effect on the team dynamic as a whole through their\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "excitability and inclusive behavior. They made sure that everyone was on the same page and that everyone's concerns were heard",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE3",
+        "ovalTemplate": "oval6",
+        "shortForm": "Pushed themselves out of their comfort zone",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0pushed themselves out of their comfort zone by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "learning how to integrate multiple Google APIs",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0a challenge that was critical for\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "our product to look beautiful and work as users expected it",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+          {
+        "id": "promptE4",
+        "ovalTemplate": "oval6",
+        "shortForm": "Exemplified extraordinary participation by....",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Outstanding Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0prioritized this class, a fact made obvious by the\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "willingness to disrupt artificial harmony and continuous dedication to the project",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+  
+        ]
+      },
+      {
+        "id": "promptE5",
+        "ovalTemplate": "oval7",
+        "shortForm": "Attentive at meetings",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was present during meetings and contributed to the team.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could be more actively engaged or contribute more by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "proposing alternatives and participating in healthy conflict during team meetings",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE6",
+        "ovalTemplate": "oval7.5",
+        "shortForm": "Occasional lapses in communication",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0sometimes\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "missed a team meeting",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "without communicating to the team, which led to\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "wasting other members' time",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE7",
+        "ovalTemplate": "oval7",
+        "shortForm": "Usually present/sometimes tardy",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was usually at meetings, but often was tardy due to personal conflicts. \u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Satisfactory Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0could reduce their lateness by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "setting multiple alarms to ensure they actually wake up",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE8",
+        "ovalTemplate": "oval8",
+        "shortForm": "Rarely present/overwhelmingly tardy",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0clearly does not prioritize meetings. They were rarely present physically, or were consistently late, which showed\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "a disregard for the value of everyone else's time and an overall lack of commitment",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE9",
+        "ovalTemplate": "oval8.5",
+        "shortForm": "Uncooperative/lack of engagement",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0was uncooperative and didn’t move the team forward through their contributions.  They were not engaged at all, as evidenced by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "the complete ambivalence to any ideas proposed and lack of meaningful input",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ". It is challenging to work with this person because\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "the team has to support a member who will not pull their own weight",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE10",
+        "ovalTemplate": "oval8",
+        "shortForm": "Could not be reached",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0 was hard to get ahold of, and made it particularly difficult to set up meetings because\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "they never responded to the group chat while scheduling, and always had conflicts after times were decided",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ". They could improve by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "prioritizing team communication higher and blocking time just for this class",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE11",
+        "ovalTemplate": "oval8.5",
+        "shortForm": "Lack of effort",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not put in the effort a class like this requires.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0should address this by\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "coming to meetings and vocalizing their opinions enough to make their presence heard",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "."
+          }
+        ]
+      },
+      {
+        "id": "promptE12",
+        "ovalTemplate": "oval8.5",
+        "shortForm": "Could improve participation by...",
+        "elements": [
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0did not participate at the minimum standard, which was detrimental to the whole team.\u00A0"
+          },
+          {
+            "type": "gradedName",
+            "placeholder": "Developing Student"
+          },
+          {
+            "type": "text",
+            "value": "\u00A0should recognize that\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "the team only functions well when everyone is engaged",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": ", and should aim to\u00A0"
+          },
+          {
+            "type": "fillIn",
+            "placeholder": "actively participate more",
+            "value": ""
+          },
+          {
+            "type": "text",
+            "value": "\u00A0moving forward."
+          }
+        ]
+      }
+    ]
+  }
+  
