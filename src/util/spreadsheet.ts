@@ -1,5 +1,8 @@
+import { until } from "async";
+
 const GoogleSpreadsheet = require("google-spreadsheet");
 const async = require("async");
+import util from "util";
 
 // spreadsheet key is the long id in the sheets URL
 const doc = new GoogleSpreadsheet("1SrkMdY0Y-XpzgYhkN_1oN313Z4OcCbHeRgqWH85WbEY");
@@ -74,7 +77,7 @@ async function populateGrade(data) {
   let sheet;
   let graderRowIndex;
 
-
+  doc.getInfo = util.promisify(doc.getInfo);
   const info = await doc.getInfo();
   console.log("Loaded doc: " + info.title + " by " + info.author.email);
   let i = 0;
@@ -82,7 +85,7 @@ async function populateGrade(data) {
     i++;
   }
   sheet = await info.worksheets[i];
-
+  sheet.getCells = util.promisify(sheet.getCells);
   let cells = await sheet.getCells({
     "min-row": 1 + projectHeaderRow,
     "max-row": 19 + projectHeaderRow,
@@ -95,6 +98,7 @@ async function populateGrade(data) {
       const graderCell = await cells[i];
       graderRowIndex = await graderCell.row;
       graderCell.value = await newGrader;
+      graderCell.save = util.promisify(graderCell.save);
       await graderCell.save();
       break;
     }
@@ -110,6 +114,7 @@ async function populateGrade(data) {
   cells[1].value = data.engagement.grade;
   cells[3].value = data.leadership.grade;
   cells[5].value = data.productivity.grade;
+  sheet.bulkUpdateCells = util.promisify(sheet.bulkUpdateCells);
   await sheet.bulkUpdateCells(cells);
   cells = await sheet.getCells({
     "min-row": graderRowIndex + 0,
