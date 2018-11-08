@@ -33,7 +33,7 @@ const emailToName = {
   "Davidshau22@berkeley.edu": "David Shau",
   "dev.ojha@berkeley.edu": "Dev Ojha",
   "dnavani@berkeley.edu": "Deven Navani",
-  "d_gonzalez@berkeley.edu": "Diego Gonzales",
+  "d_gonzalez@berkeley.edu": "Diego Gonzalez",
   "elliot.larson@berkeley.edu": "Elliot Larson",
   "erelsaul@berkeley.edu": "Erel Saul",
   "ethanbmehta@berkeley.edu": "Ethan Mehta",
@@ -63,7 +63,7 @@ const emailToName = {
   "rishma.murugan@berkeley.edu": "Rishma Murugan",
   "ryanwchen@berkeley.edu": "Ryan Chen",
   "seanlin2000@berkeley.edu": "Sean Lin",
-  "sguo35@berkeley.edu": "Shiyuan Guo",
+  "shiyuan.guo@berkeley.edu": "Shiyuan Guo",
   "sravyab@berkeley.edu": "Sravya Basvapatri",
   "vshirsat@berkeley.edu": "Vikram Shirsat",
   "v.wang@berkeley.edu": "Vincent Wang"
@@ -105,7 +105,7 @@ async function populateGrade(data) {
       const graderCell = cells[i];
       graderRowIndex = graderCell.row;
       console.log("INDEX" + graderRowIndex);
-      graderCell.value = newGrader;
+      // graderCell.value = newGrader;
       graderCell.save = util.promisify(graderCell.save);
       await graderCell.save();
       break;

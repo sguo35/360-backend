@@ -351,6 +351,6 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
       }
     }
   }
-  await populate(outGrades);
+  // await populate(outGrades);
   res.json(outGrades).status(200).end();
 };
