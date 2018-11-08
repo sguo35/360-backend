@@ -323,7 +323,7 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
                 qualString += element["value"];
               } else if (element["type"] === "fillIn") {
                 try {
-                  if (grade["responses"][key]["promptResponses"][i][j]) {
+                  if (grade["responses"][key]["promptResponses"][i] && grade["responses"][key]["promptResponses"][i][j]) {
                     qualString += grade["responses"][key]["promptResponses"][i][j];
                   }
                   else {
