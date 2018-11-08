@@ -74,105 +74,74 @@ async function populateGrade(data) {
   let sheet;
   let graderRowIndex;
 
-  async.series([
-    function findGradedSheet(step) {
-      doc.getInfo(function (err, info) {
-        console.log("Loaded doc: " + info.title + " by " + info.author.email);
-        let i = 0;
-        while (i < info.worksheets.length && info.worksheets[i].title !== newGraded) {
-          i++;
-        }
-        sheet = info.worksheets[i];
-        step();
-      });
-    },
-    function findEmptyRaterSlot(step) {
-      sheet.getCells({
-        "min-row": 1 + projectHeaderRow,
-        "max-row": 19 + projectHeaderRow,
-        "min-col": 7,
-        "max-col": 7
-      }, function (err, cells) {
-        let i = 0;
-        while (i < cells.length) {
-          if (cells[i].value === "Rater " + (i + 1)) {
-            const graderCell = cells[i];
-            graderRowIndex = graderCell.row;
-            graderCell.value = newGrader;
-            graderCell.save();
-            break;
-          }
-          i++;
-        }
-        step();
-      });
-    },
-    function populateScores(step) {
-      sheet.getCells({
-        "min-row": graderRowIndex,
-        "max-row": graderRowIndex + 5,
-        "min-col": 9,
-        "max-col": 9,
-        "return-empty": true
-      }, function (err, cells) {
-        cells[1].value = data.engagement.grade;
-        cells[3].value = data.leadership.grade;
-        cells[5].value = data.productivity.grade;
-        sheet.bulkUpdateCells(cells);
-        step();
-      });
-    },
-    function populateEngagement(step) {
-      sheet.getCells({
-        "min-row": graderRowIndex + 0,
-        "max-row": graderRowIndex + 0,
-        "min-col": 9,
-        "return-empty": true
-      }, function (err, cells) {
-        for (i = 0; i < data.engagement.qualitative.length; i++) {
-          cells[i].value = data.engagement.qualitative[i];
-        }
-        sheet.bulkUpdateCells(cells);
-        step();
-      });
-    },
-    function populateLeadership(step) {
-      sheet.getCells({
-        "min-row": graderRowIndex + 2,
-        "max-row": graderRowIndex + 2,
-        "min-col": 9,
-        "return-empty": true
-      }, function (err, cells) {
-        for (i = 0; i < data.leadership.qualitative.length; i++) {
-          cells[i].value = data.leadership.qualitative[i];
-        }
-        sheet.bulkUpdateCells(cells);
-        step();
-      });
-    },
-    function populateProductivity(step) {
-      sheet.getCells({
-        "min-row": graderRowIndex + 4,
-        "max-row": graderRowIndex + 4,
-        "min-col": 9,
-        "return-empty": true
-      }, function (err, cells) {
-        for (i = 0; i < data.productivity.qualitative.length; i++) {
-          cells[i].value = data.productivity.qualitative[i];
-        }
-        sheet.bulkUpdateCells(cells);
-        step();
-      });
-    }
-  ], function (err) {
-    console.log("BEING RUN NOW" + i);
-    if (err) {
-      console.log("Error: " + err);
-    }
-    else {
-      nextData();
-    }
+
+  const info = await doc.getInfo();
+  console.log("Loaded doc: " + info.title + " by " + info.author.email);
+  let i = 0;
+  while (i < info.worksheets.length && info.worksheets[i].title !== newGraded) {
+    i++;
+  }
+  sheet = await info.worksheets[i];
+
+  let cells = await sheet.getCells({
+    "min-row": 1 + projectHeaderRow,
+    "max-row": 19 + projectHeaderRow,
+    "min-col": 7,
+    "max-col": 7
   });
+  let j = 0;
+  while (i < cells.length) {
+    if (cells[i].value === "Rater " + (i + 1)) {
+      const graderCell = await cells[i];
+      graderRowIndex = await graderCell.row;
+      graderCell.value = await newGrader;
+      await graderCell.save();
+      break;
+    }
+    j++;
+  }
+  cells = await sheet.getCells({
+    "min-row": graderRowIndex,
+    "max-row": graderRowIndex + 5,
+    "min-col": 9,
+    "max-col": 9,
+    "return-empty": true
+  });
+  cells[1].value = data.engagement.grade;
+  cells[3].value = data.leadership.grade;
+  cells[5].value = data.productivity.grade;
+  await sheet.bulkUpdateCells(cells);
+  cells = await sheet.getCells({
+    "min-row": graderRowIndex + 0,
+    "max-row": graderRowIndex + 0,
+    "min-col": 9,
+    "return-empty": true
+  });
+  for (i = 0; i < data.engagement.qualitative.length; i++) {
+    cells[i].value = data.engagement.qualitative[i];
+  }
+  await sheet.bulkUpdateCells(cells);
+  cells = await sheet.getCells({
+    "min-row": graderRowIndex + 2,
+    "max-row": graderRowIndex + 2,
+    "min-col": 9,
+    "return-empty": true
+  });
+  for (i = 0; i < data.leadership.qualitative.length; i++) {
+    cells[i].value = data.leadership.qualitative[i];
+  }
+  await sheet.bulkUpdateCells(cells);
+  cells = await sheet.getCells({
+    "min-row": graderRowIndex + 4,
+    "max-row": graderRowIndex + 4,
+    "min-col": 9,
+    "return-empty": true
+  });
+  for (i = 0; i < data.productivity.qualitative.length; i++) {
+    cells[i].value = data.productivity.qualitative[i];
+  }
+  await sheet.bulkUpdateCells(cells);
+  console.log("BEING RUN NOW" + i);
 }
 
 function setAuth() {
