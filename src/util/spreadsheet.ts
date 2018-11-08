@@ -14,60 +14,9 @@ const projectToRow = {
   ":360": 60
 };
 
-const emailToName = {
-  "aadhrik.kuila@berkeley.edu": "Aadhrik Kuila",
-  "alara.guler@berkeley.edu": "Alara Guler",
-  "alexander.manes@berkeley.edu": "Alexander Manes",
-  "fonzy@berkeley.edu": "Alfonso Sanchev",
-  "amyguo@berkeley.edu": "Amy Guo",
-  "akirillo@berkeley.edu": "Andrew Kirillov",
-  "anikar@berkeley.edu": "Anika Ramachandran",
-  "ashvindhawan@berkeley.edu": "Ashvin Dhawan",
-  "austin.jsun@berkeley.edu ": "Austin Sun",
-  "ayush.jain@berkeley.edu": "Ayush Jain",
-  "birkaransachdev@berkeley.edu": "Birkaran Sachdev",
-  "chaigoyal@berkeley.edu": "Chai Goyal",
-  "charlie.faramarzi@berkeley.edu": "Charlie Faramarzi",
-  "chelsealo@berkeley.edu": "Chelsea Lo",
-  "daniel.jing@berkeley.edu": "Daniel Jing",
-  "Davidshau22@berkeley.edu": "David Shau",
-  "dev.ojha@berkeley.edu": "Dev Ojha",
-  "dnavani@berkeley.edu": "Deven Navani",
-  "d_gonzalez@berkeley.edu": "Diego Gonzalez",
-  "elliot.larson@berkeley.edu": "Elliot Larson",
-  "erelsaul@berkeley.edu": "Erel Saul",
-  "ethanbmehta@berkeley.edu": "Ethan Mehta",
-  "findaheng@berkeley.edu": "Francis Indaheng",
-  "hvinh@berkeley.edu": "Hannah Vinh",
-  "harishpalani@berkeley.edu": "Harish Palani",
-  "isabellezhou@berkeley.edu": "Isabelle Zhou",
-  "jahnvidoshi@berkeley.edu": "Jahnvi Doshi",
-  "j.singh@berkeley.edu": "Jaiveer Singh",
-  "julius.vering@berkeley.edu": "Julius Vering",
-  "k.chorazewicz@berkeley.edu": "Kai Chorazewicz",
-  "kelly_han@berkeley.edu": "Kelly Han",
-  "chenluofei@berkeley.edu": "Luofei Chen",
-  "manav.rathod@berkeley.edu": "Manav Rathod",
-  "matthew.hallac@berkeley.edu": "Matthew Hallac",
-  "michael.mcnabb@berkeley.edu": "Michael McNabb",
-  "michael.trehan@berkeley.edu": "Michael Trehan",
-  "nhudait@berkeley.edu": "Neha Hudait",
-  "neha.nagabothu@berkeley.edu": "Neha Nagabothu",
-  "nikmandava@berkeley.edu": "Nikhil Mandava",
-  "nishikaza@berkeley.edu": "Nishi Kaza",
-  "prangan.tooteja@berkeley.edu": "Prangan Tooteja",
-  "quinetnyre@berkeley.edu": "Quin Etnyre",
-  "rahul.hayaran@berkeley.edu": "Rahul Hayaran",
-  "richard.y.liu@berkeley.edu": "Richard Liu",
-  "rimikabanerjee@berkeley.edu": "Rimika Banerjee",
-  "rishma.murugan@berkeley.edu": "Rishma Murugan",
-  "ryanwchen@berkeley.edu": "Ryan Chen",
-  "seanlin2000@berkeley.edu": "Sean Lin",
-  "shiyuan.guo@berkeley.edu": "Shiyuan Guo",
-  "sravyab@berkeley.edu": "Sravya Basvapatri",
-  "vshirsat@berkeley.edu": "Vikram Shirsat",
-  "v.wang@berkeley.edu": "Vincent Wang"
-};
+import { email2name } from "../controllers/api";
+
+const emailToName = email2name;
 
 async function populateGrade(data) {
   const newGraded = emailToName[data.graded];

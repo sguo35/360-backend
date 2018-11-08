@@ -21,7 +21,7 @@ for (const template of ovalTemplates) {
 ovalTemplates = newTemplateObj;
 
 const projectsJson = require("../../projects.json");
-const email2name = {};
+export const email2name = {};
 const name2email = {};
 for (const project of projectsJson["projects"]) {
   for (const team of project["teams"]) {
@@ -351,6 +351,6 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
       }
     }
   }
-  // await populate(outGrades);
+  await populate(outGrades);
   res.json(outGrades).status(200).end();
 };
