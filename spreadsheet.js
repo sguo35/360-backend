@@ -196,8 +196,10 @@ function nextData() {
 setAuth();
 
 
-export const populate = async (data) => {
+const populate = async (data) => {
   for (const entry of data) {
     await populateGrade(entry);
   }
 }
+
+module.exports = { populate: populate };
