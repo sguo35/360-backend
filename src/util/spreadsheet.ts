@@ -104,6 +104,7 @@ async function populateGrade(data) {
     }
     j++;
   }
+  console.log(graderRowIndex);
   cells = await sheet.getCells({
     "min-row": graderRowIndex,
     "max-row": graderRowIndex + 5,
