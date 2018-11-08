@@ -86,8 +86,12 @@ async function populateGrade(data) {
   while (i < info.worksheets.length && info.worksheets[i].title !== newGraded) {
     i++;
   }
-  sheet = info.worksheets[i];
-  sheet.getCells = util.promisify(sheet.getCells);
+  sheet = await info.worksheets[i];
+  if (sheet) {
+    sheet.getCells = util.promisify(sheet.getCells);
+  } else {
+    return;
+  }
   let cells = await sheet.getCells({
     "min-row": 1 + projectHeaderRow,
     "max-row": 19 + projectHeaderRow,
@@ -177,7 +181,12 @@ setAuth();
 
 export const populate = async (data) => {
   for (const entry of data) {
-    await populateGrade(entry);
+    try {
+      await populateGrade(entry);
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 };
 
