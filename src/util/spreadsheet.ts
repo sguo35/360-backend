@@ -98,6 +98,7 @@ async function populateGrade(data) {
     if (cells[i].value === "Rater " + (i + 1)) {
       const graderCell = cells[i];
       graderRowIndex = graderCell.row;
+      console.log("INDEX" + graderRowIndex);
       graderCell.value = newGrader;
       graderCell.save = util.promisify(graderCell.save);
       await graderCell.save();
