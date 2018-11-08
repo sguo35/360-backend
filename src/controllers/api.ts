@@ -278,7 +278,7 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
         for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
           const prompt = grade["responses"][key]["prompts"][i];
 
-          totalPoints += ovalTemplates[prompt["ovalTemplate"]];
+          totalPoints += ovalTemplates[prompt["ovalTemplate"]]["points"];
 
           let qualString = "";
           for (let j = 0; j < prompt["elements"].length; j++) {
@@ -287,7 +287,7 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
             if (element["type"] === "gradedName") {
               qualString += email2name[grade["graded"]];
             } else if (element["type"] === "text") {
-              qualString += email2name["value"];
+              qualString += element["value"];
             } else if (element["type"] === "fillIn") {
               try {
                 qualString += grade["responses"][key]["promptResponses"][i][j];
