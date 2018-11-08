@@ -338,6 +338,10 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
           }
         }
         for (let i = 0; i < 3; i++) {
+          if (lengthDict[i] === 0) {
+            lengthDict[i] = 1;
+            totalPoints[i] = i === 0 ? 8 : (i === 1 ? 13 : 23);
+          }
           totalPoints[i] = totalPoints[i] / lengthDict[i];
           gradeObject[questionLookup[i]]["grade"] = totalPoints[i];
         }
