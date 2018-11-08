@@ -179,7 +179,7 @@ function setAuth() {
   // see notes below for authentication instructions!
   const creds = require("./client_secret.json");
   doc.useServiceAccountAuth(creds, async function callback() {
-    populateGrade(data[0]);
+    // populateGrade(data[0]);
   });
 }
 let i = 0;
