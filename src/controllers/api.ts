@@ -266,6 +266,9 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
         graded: email
       });
       grades = <Array<ProjectGradeModel>>grades;
+      grades = grades.filter((grade) => {
+        return grade["grader"] !== grade["graded"];
+      });
 
       for (const grade of grades) {
         const gradeObject = {
