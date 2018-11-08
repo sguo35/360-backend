@@ -74,6 +74,8 @@ async function populateGrade(data) {
   const newGrader = emailToName[data.grader];
   const projectHeaderRow = projectToRow[data.project];
 
+  console.log(newGraded);
+
   let sheet;
   let graderRowIndex;
 
@@ -92,7 +94,7 @@ async function populateGrade(data) {
     "min-col": 7,
     "max-col": 7
   });
-  console.log(cells);
+  // console.log(cells);
   i = 0;
   while (i < cells.length) {
     if (cells[i].value === "Rater " + (i + 1)) {
