@@ -289,7 +289,12 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
             } else if (element["type"] === "text") {
               qualString += email2name["value"];
             } else if (element["type"] === "fillIn") {
-              qualString += grade["responses"][key]["promptResponses"][i][j];
+              try {
+                qualString += grade["responses"][key]["promptResponses"][i][j];
+              }
+              catch (e) {
+                console.log(e);
+              }
             }
           }
 
