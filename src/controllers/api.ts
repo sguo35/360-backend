@@ -20,10 +20,19 @@ ovalTemplates = newTemplateObj;
 
 const projectsJson = require("../../projects.json");
 const email2name = {};
+const name2email = {};
 for (const project of projectsJson["projects"]) {
   for (const team of project["teams"]) {
     for (let i = 0; i < team["memberEmails"].length; i++) {
       email2name[team["memberEmails"][i]] = team["memberNames"][i];
+    }
+  }
+}
+
+for (const project of projectsJson["projects"]) {
+  for (const team of project["teams"]) {
+    for (let i = 0; i < team["memberEmails"].length; i++) {
+      name2email[team["memberNames"][i]] = team["memberEmails"][i];
     }
   }
 }
@@ -242,22 +251,16 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
   const outGrades = [];
   // process grades for each person
   for (const projectName of projectList) {
-    // get everything from the MongoDB
-    let grades = await ProjectGrade.find({
-      project: projectName
-    });
-    grades = <Array<ProjectGradeModel>>grades;
-
     const questionLookup = {
       "0": "leadership",
       "1": "productivity",
       "2": "engagement"
     };
 
-    for (const grade of grades) {
+    for (const email in email2name) {
       // compile quantitative feedback
       const gradeObject = {
-        graded: grade["graded"],
+        graded: email,
         leadership: {
           grade: 0,
           qualitative: []
@@ -273,37 +276,59 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
         project: projectName
       };
 
-      for (const key in grade["responses"]) {
-        let totalPoints = 0;
-        for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
-          const prompt = grade["responses"][key]["prompts"][i];
+      // get everything from the MongoDB
+      let grades = await ProjectGrade.find({
+        project: projectName,
+        graded: email
+      });
+      grades = <Array<ProjectGradeModel>>grades;
 
-          totalPoints += ovalTemplates[prompt["ovalTemplate"]]["points"];
+      const totalPoints = {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      };
+      const lengthDict = {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      };
 
-          let qualString = "";
-          for (let j = 0; j < prompt["elements"].length; j++) {
-            const element = prompt["elements"][j];
+      for (const grade of grades) {
+        for (const key in grade["responses"]) {
+          for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
+            const prompt = grade["responses"][key]["prompts"][i];
 
-            if (element["type"] === "gradedName") {
-              qualString += email2name[grade["graded"]];
-            } else if (element["type"] === "text") {
-              qualString += element["value"];
-            } else if (element["type"] === "fillIn") {
-              try {
-                qualString += grade["responses"][key]["promptResponses"][i][j];
-              }
-              catch (e) {
-                console.log(e);
+            totalPoints[key] += ovalTemplates[prompt["ovalTemplate"]]["points"];
+            lengthDict[key] += 1;
+
+            let qualString = "";
+            for (let j = 0; j < prompt["elements"].length; j++) {
+              const element = prompt["elements"][j];
+
+              if (element["type"] === "gradedName") {
+                qualString += email2name[grade["graded"]];
+              } else if (element["type"] === "text") {
+                qualString += element["value"];
+              } else if (element["type"] === "fillIn") {
+                try {
+                  qualString += grade["responses"][key]["promptResponses"][i][j];
+                }
+                catch (e) {
+                  console.log(e);
+                }
               }
             }
-          }
 
-          gradeObject[questionLookup[key]]["qualitative"].push(qualString);
+            gradeObject[questionLookup[key]]["qualitative"].push(qualString);
+          }
         }
-        totalPoints = totalPoints / grade["responses"][key]["prompts"].length;
-        gradeObject[questionLookup[key]]["grade"] = totalPoints;
       }
 
+      for (let i = 0; i < 3; i++) {
+        totalPoints[i] = totalPoints[i] / lengthDict[i];
+        gradeObject[i]["grade"] = totalPoints[i];
+      }
       outGrades.push(gradeObject);
     }
   }
