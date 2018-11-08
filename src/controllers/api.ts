@@ -259,22 +259,6 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
 
     for (const email in email2name) {
       // compile quantitative feedback
-      const gradeObject = {
-        graded: email,
-        leadership: {
-          grade: 0,
-          qualitative: []
-        },
-        productivity: {
-          grade: 0,
-          qualitative: []
-        },
-        engagement: {
-          grade: 0,
-          qualitative: []
-        },
-        project: projectName
-      };
 
       // get everything from the MongoDB
       let grades = await ProjectGrade.find({
@@ -283,18 +267,33 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
       });
       grades = <Array<ProjectGradeModel>>grades;
 
-      const totalPoints = {
-        "0": 0,
-        "1": 0,
-        "2": 0
-      };
-      const lengthDict = {
-        "0": 0,
-        "1": 0,
-        "2": 0
-      };
-
       for (const grade of grades) {
+        const gradeObject = {
+          graded: email,
+          leadership: {
+            grade: 0,
+            qualitative: []
+          },
+          productivity: {
+            grade: 0,
+            qualitative: []
+          },
+          engagement: {
+            grade: 0,
+            qualitative: []
+          },
+          project: projectName
+        };
+        const totalPoints = {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        };
+        const lengthDict = {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        };
         for (const key in grade["responses"]) {
           for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
             const prompt = grade["responses"][key]["prompts"][i];
@@ -323,13 +322,12 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
             gradeObject[questionLookup[key]]["qualitative"].push(qualString);
           }
         }
+        for (let i = 0; i < 3; i++) {
+          totalPoints[i] = totalPoints[i] / lengthDict[i];
+          gradeObject[questionLookup[i]]["grade"] = totalPoints[i];
+        }
+        outGrades.push(gradeObject);
       }
-
-      for (let i = 0; i < 3; i++) {
-        totalPoints[i] = totalPoints[i] / lengthDict[i];
-        gradeObject[questionLookup[i]]["grade"] = totalPoints[i];
-      }
-      outGrades.push(gradeObject);
     }
   }
 
