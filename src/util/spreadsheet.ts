@@ -14,9 +14,16 @@ const projectToRow = {
   ":360": 60
 };
 
-import { email2name } from "../controllers/api";
+const projectsJson = require("../../projects.json");
+const emailToName = {};
+for (const project of projectsJson["projects"]) {
+  for (const team of project["teams"]) {
+    for (let i = 0; i < team["memberEmails"].length; i++) {
+      emailToName[team["memberEmails"][i]] = team["memberNames"][i];
+    }
+  }
+}
 
-const emailToName = email2name;
 
 async function populateGrade(data) {
   const newGraded = emailToName[data.graded];
