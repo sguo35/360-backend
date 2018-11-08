@@ -52,7 +52,7 @@ interface UpdateProjectGradeRequest extends Request {
  * for the given ProjectGrade to the server, even if some of them have not changed.
  */
 export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Response) => {
-  const projectGrade = <ProjectGradeModel>await ProjectGrade.findOne({
+  let projectGrade = <ProjectGradeModel>await ProjectGrade.findOne({
     grader: req.body.grader,
     project: req.body.project,
     graded: req.body.graded
@@ -68,6 +68,12 @@ export const updateProjectGrade = async (req: UpdateProjectGradeRequest, res: Re
       done: false
     });
   }
+
+  projectGrade = <ProjectGradeModel>await ProjectGrade.findOne({
+    grader: req.body.grader,
+    project: req.body.project,
+    graded: req.body.graded
+  });
 
   await ProjectGrade.findOne({
     grader: req.body.grader,
