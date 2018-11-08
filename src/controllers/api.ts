@@ -327,7 +327,7 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
 
       for (let i = 0; i < 3; i++) {
         totalPoints[i] = totalPoints[i] / lengthDict[i];
-        gradeObject[i]["grade"] = totalPoints[i];
+        gradeObject[questionLookup[i]]["grade"] = totalPoints[i];
       }
       outGrades.push(gradeObject);
     }
