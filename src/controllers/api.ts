@@ -253,8 +253,17 @@ export const oauthCallback = async (req: Request, res: Response) => {
 };
 
 
-export const updateSpreadsheet = async (req: Request, res: Response) => {
-  const projectList = [":Icebreakers", ":Attendy"];
+interface UpdateSpreadsheetRequest extends Request {
+  body: {
+    projectList: Array<string>;
+  };
+}
+export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Response) => {
+  let projectList = [":Icebreakers", ":Attendy"];
+  if (req.body.projectList) {
+    projectList = req.body.projectList;
+    console.log(projectList);
+  }
 
   const outGrades = [];
   // process grades for each person
