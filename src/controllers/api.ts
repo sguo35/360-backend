@@ -354,3 +354,19 @@ export const updateSpreadsheet = async (req: Request, res: Response) => {
   await populate(outGrades);
   res.json(outGrades).status(200).end();
 };
+
+
+interface CheckSubmissionsRequest extends Request {
+  body: {
+    grader: string;
+    project: string;
+  };
+}
+export const checkSubmissions = async (req: CheckSubmissionsRequest, res: Response) => {
+  const submissions = <Array<ProjectGradeModel >> (await ProjectGrade.find({
+    grader: req.body.grader,
+    project: req.body.project
+  }));
+
+  res.json(submissions).status(200).end();
+};

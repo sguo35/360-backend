@@ -73,6 +73,7 @@ app.post("/getProjectGrade", controllers.getProjectGrade);
 app.post("/submitProjectGrade", controllers.submitProjectGrade);
 
 app.post("/updateSpreadsheet", controllers.updateSpreadsheet);
+app.post("/checkSubmissions", controllers.checkSubmissions);
 
 /**
  * Primary app routes.
