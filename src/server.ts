@@ -19,4 +19,10 @@ const server = app.listen(app.get("port"), () => {
   console.log("  Press CTRL-C to stop\n");
 });
 
+const syncTeams = async () => {
+
+};
+
+setTimeout(() => syncTeams(), 5000);
+
 export default server;

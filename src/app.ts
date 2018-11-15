@@ -13,6 +13,8 @@ import expressValidator from "express-validator";
 import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
+import * as controllers from "./controllers/api";
+
 const MongoStore = mongo(session);
 
 // Load environment variables from .env file, where API keys and passwords are configured
@@ -40,20 +42,38 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
 app.use(flash());
-app.use(lusca.xframe("SAMEORIGIN"));
-app.use(lusca.xssProtection(true));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-app.use('/', express.static(path.join(__dirname, '../public')));
-app.get('*', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), 'index.html'));
+app.get("/oauthCallback", controllers.oauthCallback);
+
+app.use("/", express.static(path.join(__dirname, "../public")));
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), "index.html"));
 });
-app.get('*.js', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+app.get("*.js", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), request.originalUrl));
 });
-app.get('*.css', function (request, response) {
-  response.sendFile(path.resolve(path.join(__dirname, '../public'), request.originalUrl));
+app.get("*.css", function (request, response) {
+  response.sendFile(path.resolve(path.join(__dirname, "../public"), request.originalUrl));
 });
+app.use(
+  express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+);
+
+app.post("/oauth", controllers.oauthToken);
+app.post("/updateProjectGrade", controllers.updateProjectGrade);
+app.post("/getAccount", controllers.getAccount);
+app.post("/getProjectGradeIds", controllers.getProjectGradeIds);
+app.post("/getProjectGrade", controllers.getProjectGrade);
+app.post("/submitProjectGrade", controllers.submitProjectGrade);
+
+app.post("/updateSpreadsheet", controllers.updateSpreadsheet);
+
 /**
  * Primary app routes.
  */
