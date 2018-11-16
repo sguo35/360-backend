@@ -265,7 +265,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
     console.log(projectList);
   }
 
-  const outGrades = [];
+  let outGrades = [];
   // process grades for each person
   for (const projectName of projectList) {
     const questionLookup = {
@@ -287,7 +287,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
       grades = grades.filter((grade) => {
         return grade["grader"] !== grade["graded"];
       });
-
+      console.log("Calculating grades...")
       for (const grade of grades) {
         const gradeObject = {
           graded: email,
@@ -316,6 +316,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
           "1": 0,
           "2": 0
         };
+        console.log("Calculating responses")
         for (const key in grade["responses"]) {
           for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
             const prompt = grade["responses"][key]["prompts"][i];
@@ -349,6 +350,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
             gradeObject[questionLookup[key]]["qualitative"].push(qualString);
           }
         }
+        console.log("Averaging grades")
         for (let i = 0; i < 3; i++) {
           if (lengthDict[i] === 0) {
             lengthDict[i] = 1;
@@ -360,8 +362,11 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
         outGrades.push(gradeObject);
       }
     }
+    console.log("Populating grades")
+    await populate(outGrades);
+    outGrades = [];
   }
-  await populate(outGrades);
+  
   res.json(outGrades).status(200).end();
 };
 
