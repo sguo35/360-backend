@@ -283,6 +283,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
         graded: email
       });
       grades = <Array<ProjectGradeModel>>grades;
+      console.log(grades.length)
       grades = grades.filter((grade) => {
         return grade["grader"] !== grade["graded"];
       });
