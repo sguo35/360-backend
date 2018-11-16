@@ -276,7 +276,7 @@ export const updateSpreadsheet = async (req: UpdateSpreadsheetRequest, res: Resp
 
     for (const email in email2name) {
       // compile quantitative feedback
-
+      console.log(email)
       // get everything from the MongoDB
       let grades = await ProjectGrade.find({
         project: projectName,
