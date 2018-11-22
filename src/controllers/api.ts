@@ -394,6 +394,7 @@ interface GetFeedbackRequest extends Request {
   };
 }
 export const getFeedback = async (req: GetFeedbackRequest, res: Response) => {
+  console.log(req.body)
   let projectList = [":Icebreakers"];
   if (req.body.project) {
     projectList = [req.body.project];
