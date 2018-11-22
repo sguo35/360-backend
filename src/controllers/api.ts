@@ -414,6 +414,7 @@ export const getFeedback = async (req: GetFeedbackRequest, res: Response) => {
       "1": "productivity",
       "2": "engagement"
     };
+    console.log(emails)
 
     for (const email in emails) {
       // compile quantitative feedback
