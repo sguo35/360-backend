@@ -385,3 +385,124 @@ export const checkSubmissions = async (req: CheckSubmissionsRequest, res: Respon
 
   res.json(submissions).status(200).end();
 };
+
+
+interface GetFeedbackRequest extends Request {
+  body: {
+    project: string;
+    email: string;
+  };
+}
+export const getFeedback = async (req: GetFeedbackRequest, res: Response) => {
+  let projectList = [":Icebreakers"];
+  if (req.body.project) {
+    projectList = [req.body.project];
+    console.log(projectList);
+  }
+
+  let emails = ["s.t@berkeley.edu"]
+  if (req.body.email) {
+    emails = [req.body.email];
+  }
+
+  let outGrades = [];
+  // process grades for each person
+  for (const projectName of projectList) {
+    const questionLookup = {
+      "0": "leadership",
+      "1": "productivity",
+      "2": "engagement"
+    };
+
+    for (const email in emails) {
+      // compile quantitative feedback
+      console.log(email)
+      // get everything from the MongoDB
+      let grades = await ProjectGrade.find({
+        project: projectName,
+        graded: email
+      });
+      grades = <Array<ProjectGradeModel>>grades;
+      console.log(grades.length)
+      grades = grades.filter((grade) => {
+        return grade["grader"] !== grade["graded"];
+      });
+      console.log("Calculating grades...")
+      for (const grade of grades) {
+        const gradeObject = {
+          graded: email,
+          grader: grade["grader"],
+          leadership: {
+            grade: 0,
+            qualitative: []
+          },
+          productivity: {
+            grade: 0,
+            qualitative: []
+          },
+          engagement: {
+            grade: 0,
+            qualitative: []
+          },
+          project: projectName
+        };
+        const totalPoints = {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        };
+        const lengthDict = {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        };
+        console.log("Calculating responses")
+        for (const key in grade["responses"]) {
+          for (let i = 0; i < grade["responses"][key]["prompts"].length; i++) {
+            const prompt = grade["responses"][key]["prompts"][i];
+
+            totalPoints[key] += ovalTemplates[prompt["ovalTemplate"]]["points"];
+            lengthDict[key] += 1;
+
+            let qualString = "";
+            for (let j = 0; j < prompt["elements"].length; j++) {
+              const element = prompt["elements"][j];
+
+              if (element["type"] === "gradedName") {
+                qualString += email2name[grade["graded"]];
+              } else if (element["type"] === "text") {
+                qualString += element["value"];
+              } else if (element["type"] === "fillIn") {
+                try {
+                  if (grade["responses"][key]["promptResponses"][i] && grade["responses"][key]["promptResponses"][i][j]) {
+                    qualString += grade["responses"][key]["promptResponses"][i][j];
+                  }
+                  else {
+                    qualString += element["placeholder"];
+                  }
+                }
+                catch (e) {
+                  console.log(e);
+                }
+              }
+            }
+
+            gradeObject[questionLookup[key]]["qualitative"].push(qualString);
+          }
+        }
+        console.log("Averaging grades")
+        for (let i = 0; i < 3; i++) {
+          if (lengthDict[i] === 0) {
+            lengthDict[i] = 1;
+            totalPoints[i] = i === 0 ? 8 : (i === 1 ? 13 : 23);
+          }
+          totalPoints[i] = totalPoints[i] / lengthDict[i];
+          gradeObject[questionLookup[i]]["grade"] = totalPoints[i];
+        }
+        outGrades.push(gradeObject);
+      }
+    }
+  }
+  
+  res.json(outGrades).status(200).end();
+};
