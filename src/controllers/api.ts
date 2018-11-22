@@ -416,7 +416,7 @@ export const getFeedback = async (req: GetFeedbackRequest, res: Response) => {
     };
     console.log(emails)
 
-    for (const email in emails) {
+    for (const email of emails) {
       // compile quantitative feedback
       console.log(email)
       // get everything from the MongoDB
