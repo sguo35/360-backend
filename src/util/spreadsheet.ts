@@ -11,7 +11,8 @@ const data = require("./data.json");
 const projectToRow = {
   ":Icebreakers": 10,
   ":Attendy": 35,
-  ":360": 60
+  ":360": 60,
+  ":EL Video": 85
 };
 
 const projectsJson = require("../../projects.json");
