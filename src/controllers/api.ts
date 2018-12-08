@@ -508,3 +508,24 @@ export const getFeedback = async (req: GetFeedbackRequest, res: Response) => {
   
   res.json(outGrades).status(200).end();
 };
+
+interface FindZerosRequest extends Request {
+  body: {
+    project: string;
+  }
+}
+export const findZeros = async (req: FindZerosRequest, res: Response) => {
+  let zeros = [];
+  let emails = Object.keys(email2name);
+
+  for (let email of emails) {
+    const submissions = await ProjectGrade.find({
+      grader: email,
+      project: req.body.project
+    })
+    if (submissions.length === 0) {
+      zeros.push(email2name[email])
+    }
+  }
+  res.json(zeros).end();
+}

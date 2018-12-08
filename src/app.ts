@@ -75,6 +75,7 @@ app.post("/submitProjectGrade", controllers.submitProjectGrade);
 app.post("/updateSpreadsheet", controllers.updateSpreadsheet);
 app.post("/checkSubmissions", controllers.checkSubmissions);
 app.post("/getFeedback", controllers.getFeedback);
+app.post("/findZeros", controllers.findZeros);
 
 /**
  * Primary app routes.
