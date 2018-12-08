@@ -5,7 +5,8 @@ const async = require("async");
 import util from "util";
 
 // spreadsheet key is the long id in the sheets URL
-const doc = new GoogleSpreadsheet("1UdS5gMdwMk-CHKi7nrswDZgZHeZTC5u1NPBzHbzR63c");
+// const doc = new GoogleSpreadsheet("1UdS5gMdwMk-CHKi7nrswDZgZHeZTC5u1NPBzHbzR63c");
+const doc = new GoogleSpreadsheet("1nWyitJoumQiNS7S_ly_BHY7M0ER8EdHZ_uc_XfKDqfA");
 const data = require("./data.json");
 
 const projectToRow = {
