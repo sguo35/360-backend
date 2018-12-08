@@ -13,7 +13,9 @@ const projectToRow = {
   ":Icebreakers": 10,
   ":Attendy": 35,
   ":360": 60,
-  ":EL Video": 85
+  ":EL Video": 85,
+  ":Sports Tech Final": 35,
+  ":Sports Tech Midpoint": 10
 };
 
 const projectsJson = require("../../projects.json");
